@@ -1,5 +1,8 @@
 package com.spring.hubinoinstitution.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,5 +89,13 @@ public class Institution {
 		training.setDescription(desc);
 		training.setDuration(duration);
 		return trainingService.saveTrainingDetails(training,USERNAME);
+	}
+	
+	@GetMapping("/edit")
+	public ModelAndView editTrainingDetails(@RequestParam(name = "id") String id) {
+		Training trainingInfo = trainingService.editTrainingDetails(id).get();
+		ModelAndView modelAndView = new ModelAndView("editform");
+		modelAndView.addObject("trainingInfo", trainingInfo);
+		return modelAndView;
 	}
 }

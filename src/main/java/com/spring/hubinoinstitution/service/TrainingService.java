@@ -1,6 +1,7 @@
 package com.spring.hubinoinstitution.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,9 +65,9 @@ public class TrainingService {
 		default: return "https://en.wikipedia.org/wiki/Programming_language";
 		}
 	}
-	
-	public void getUser(String trainingId) {
-		System.out.println("string :"+trainingId);
+
+	public Optional<Training> editTrainingDetails(String id) {
+		return trainingRepo.findById(Integer.parseInt(id));
 	}
 
 }

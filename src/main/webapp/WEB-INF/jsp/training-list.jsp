@@ -48,15 +48,9 @@
 								<span class="font-weight-bold">Duration : </span><label>${u.duration}</label>
 							</p>
 
-							<%
-							String userid = "Banda";
-							%>
-							<form action="editform.jsp" method="post">
-								<%
-								session.setAttribute("userId", userid);
-								%>
-								<input type="submit" value="Login">
-							</form>
+							<a href="edit?id=<c:out value='${u.trainingId}' />">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="delete?id=<c:out value='${u.trainingId}' />">Delete</a>
 						</div>
 					</div>
 				</div>

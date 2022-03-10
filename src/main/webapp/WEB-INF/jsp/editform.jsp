@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<%String userid = session.getAttribute("userId").toString(); %>Hello<%=userid%>
+<h1>${trainingInfo.course_img}</h1>
 
 </body>
 </html>
