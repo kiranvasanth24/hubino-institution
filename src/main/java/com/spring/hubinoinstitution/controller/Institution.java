@@ -75,7 +75,7 @@ public class Institution {
 	}
 
 	@GetMapping("/training")
-	public String training(@RequestParam(name = "course") String course, @RequestParam(name = "trainer") String trainer,
+	public ModelAndView training(@RequestParam(name = "course") String course, @RequestParam(name = "trainer") String trainer,
 			@RequestParam(name = "start_date") String start_date, @RequestParam(name = "end_date") String end_date,
 			@RequestParam(name = "desc") String desc, @RequestParam(name = "duration") String duration) {
 		Training training = new Training();
@@ -85,7 +85,6 @@ public class Institution {
 		training.setEnd_date(end_date);
 		training.setDescription(desc);
 		training.setDuration(duration);
-		trainingService.saveTrainingDetails(training,USERNAME);
-		return "todo notification to send";
+		return trainingService.saveTrainingDetails(training,USERNAME);
 	}
 }

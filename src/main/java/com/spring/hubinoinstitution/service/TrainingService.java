@@ -1,7 +1,10 @@
 package com.spring.hubinoinstitution.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.hubinoinstitution.model.Training;
 import com.spring.hubinoinstitution.model.Users;
@@ -17,7 +20,7 @@ public class TrainingService {
 	@Autowired
 	private UserRepo userRepo;
 	
-	public Training saveTrainingDetails(Training training, String username) {
+	public ModelAndView saveTrainingDetails(Training training, String username) {
 		//get user id by username
 		Users user=userRepo.findByUserName(username);
 		
@@ -31,7 +34,15 @@ public class TrainingService {
 		//update status
 		training.setIs_deleted("");
 		
-		return trainingRepo.save(training);
+		ModelAndView modelAndView = new ModelAndView("training-list");
+		
+		List<Training> trainingList = trainingRepo.findByUserId(user.getUserId());
+		
+		modelAndView.addObject("list", trainingList);
+		
+		trainingRepo.save(training);
+		
+		return modelAndView;
 	}
 	
 	public String getImageUrl(String course) {
@@ -52,6 +63,10 @@ public class TrainingService {
 		case "scala": return "https://en.wikipedia.org/wiki/Scala_(programming_language)";
 		default: return "https://en.wikipedia.org/wiki/Programming_language";
 		}
+	}
+	
+	public void getUser(String trainingId) {
+		System.out.println("string :"+trainingId);
 	}
 
 }
