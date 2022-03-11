@@ -70,4 +70,8 @@ public class TrainingService {
 		return trainingRepo.findById(Integer.parseInt(id));
 	}
 
+	public void updateTrainingDetails(String trainingId, String trainer_name, String description, String course) {
+		trainingRepo.updateTrainingDetails(Integer.parseInt(trainingId),trainer_name,description,course);
+	}
+
 }

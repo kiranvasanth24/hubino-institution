@@ -98,4 +98,11 @@ public class Institution {
 		modelAndView.addObject("trainingInfo", trainingInfo);
 		return modelAndView;
 	}
+	
+	@PostMapping("/update")
+	public void updateTrainingDetails(@RequestParam(name = "trainer_name") String trainer_name
+			,@RequestParam(name = "description") String description,@RequestParam(name = "course") String course,
+			@RequestParam(name = "trainingId") String trainingId) {
+		trainingService.updateTrainingDetails(trainingId,trainer_name,description,course);
+	}
 }

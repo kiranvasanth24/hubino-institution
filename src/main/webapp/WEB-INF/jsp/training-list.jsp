@@ -42,7 +42,7 @@
 								<span class="font-weight-bold">Id : </span><label>${u.trainingId}</label>
 							</p>
 							<p class="card-text">
-								<span class="font-weight-bold">start_date : </span><label>${u.start_date}</label>
+								<span class="font-weight-bold">Course : </span><label>${u.course}</label>
 							</p>
 							<p class="card-text">
 								<span class="font-weight-bold">Duration : </span><label>${u.duration}</label>
