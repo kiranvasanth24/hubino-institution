@@ -30,7 +30,7 @@ public class Institution {
 	@GetMapping("/")
 	public String registerUser() {
 		return "welcome";
-		
+
 	}
 
 	@GetMapping("/register_page")
@@ -66,31 +66,39 @@ public class Institution {
 	public ModelAndView loginUser(@RequestParam(name = "username") String username,
 			@RequestParam(name = "password") String password) {
 		String value = userService.loginUser(username, password);
-		if(value.equals("failure")) {
+		if (value.equals("failure")) {
 			ModelAndView modelAndView = new ModelAndView("login");
 			return modelAndView;
-		}else {
+		} else {
 			USERNAME = username;
-			ModelAndView modelAndView = new ModelAndView("training");
+			ModelAndView modelAndView = new ModelAndView("training-list");
 			modelAndView.addObject("username", USERNAME);
 			return modelAndView;
 		}
 	}
-
+	@GetMapping("/add_user")
+	public String addUser() {
+		return "training";
+	}
+	
 	@GetMapping("/training")
-	public ModelAndView training(@RequestParam(name = "course") String course, @RequestParam(name = "trainer") String trainer,
-			@RequestParam(name = "start_date") String start_date, @RequestParam(name = "end_date") String end_date,
-			@RequestParam(name = "desc") String desc, @RequestParam(name = "duration") String duration) {
+	public ModelAndView training(@RequestParam(name = "id") String id, @RequestParam(name = "course") String course,
+			@RequestParam(name = "trainer") String trainer, @RequestParam(name = "start_date") String start_date,
+			@RequestParam(name = "end_date") String end_date, @RequestParam(name = "desc") String desc,
+			@RequestParam(name = "duration") String duration) {
 		Training training = new Training();
+		if (!id.equals("")) {
+			training.setTrainingId(Integer.parseInt(id));
+		}
 		training.setCourse(course);
 		training.setTrainer_name(trainer);
 		training.setStart_date(start_date);
 		training.setEnd_date(end_date);
 		training.setDescription(desc);
 		training.setDuration(duration);
-		return trainingService.saveTrainingDetails(training,USERNAME);
+		return trainingService.saveTrainingDetails(training, USERNAME);
 	}
-	
+
 	@GetMapping("/edit")
 	public ModelAndView editTrainingDetails(@RequestParam(name = "id") String id) {
 		Training trainingInfo = trainingService.editTrainingDetails(id).get();
@@ -98,11 +106,10 @@ public class Institution {
 		modelAndView.addObject("trainingInfo", trainingInfo);
 		return modelAndView;
 	}
-	
-	@PostMapping("/update")
-	public void updateTrainingDetails(@RequestParam(name = "trainer_name") String trainer_name
-			,@RequestParam(name = "description") String description,@RequestParam(name = "course") String course,
-			@RequestParam(name = "trainingId") String trainingId) {
-		trainingService.updateTrainingDetails(trainingId,trainer_name,description,course);
+
+	@GetMapping("/delete")
+	public ModelAndView deleteTrainingDetails(@RequestParam(name = "id") String id) {
+		trainingService.deleteTrainingDetails(id);
+		return trainingService.sendTrainingList(id);
 	}
 }

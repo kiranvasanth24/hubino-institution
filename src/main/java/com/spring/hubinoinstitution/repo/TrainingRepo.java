@@ -19,7 +19,7 @@ public interface TrainingRepo extends JpaRepository<Training, Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "update training_details set trainer_name=:trainer_name,course=:course,description=:description where training_id=:trainingId",nativeQuery = true)
-	void updateTrainingDetails(int trainingId, String trainer_name, String description, String course);
+	@Query(value = "update training_details set is_deleted='1' where training_id=:id",nativeQuery = true)
+	void deleteTrainingDetails(int id);
 
 }

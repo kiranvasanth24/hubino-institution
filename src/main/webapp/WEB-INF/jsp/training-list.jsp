@@ -13,12 +13,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-
-<style>
-.card-deck {
-	margin-bottom: 15px;
-}
-</style>
 </head>
 <body>
 
@@ -27,7 +21,7 @@
 
 	<div class="container">
 		<h1>Users List</h1>
-		<a href="adduserform.jsp">Add New User</a>
+		<a class="btn btn-success" href="add_user">Add New User</a>
 		<div class="row">
 			<c:forEach items="${list}" var="u">
 				<div class="col-3 card-deck">
@@ -48,8 +42,8 @@
 								<span class="font-weight-bold">Duration : </span><label>${u.duration}</label>
 							</p>
 
-							<a href="edit?id=<c:out value='${u.trainingId}' />">Edit</a>
-								&nbsp;&nbsp;&nbsp;&nbsp; <a
+							<a class="btn btn-primary" href="edit?id=<c:out value='${u.trainingId}' />">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger"
 								href="delete?id=<c:out value='${u.trainingId}' />">Delete</a>
 						</div>
 					</div>

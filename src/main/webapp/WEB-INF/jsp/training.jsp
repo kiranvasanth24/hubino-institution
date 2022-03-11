@@ -102,7 +102,8 @@ body {
 		m-auto d-block">
 
 			<form action="training" method="get">
-
+				
+				<input type="hidden" name="id" id="id" /> <br />
 				<div class="form-group">
 					<label style="color: white">Course: </label><select name="course"
 						class="form-control">
